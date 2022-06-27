@@ -1,37 +1,60 @@
 #include <bits/stdc++.h>
+
 using namespace std;
 
+#include <bits/stdc++.h>
+using namespace std;
 
-int main(){
+int solution(string s){
 	
-	int n;
-	int cnt=0;
+	vector<int> arr;
+	int score=0;
+	int pre=0;
+	int sum=0;
 	
-	cin >> n;
+	cin >> s;
 	
-	for(int i=0; i<n; i++){
-		string s;
-		int arr[26]={0};
+	for(int i=0; i<s.length(); i++){
+		        
+		if(i==0)
+			score=s[i]-'0';
 		
-		cin >> s;
-		
-		for(int j=0; j<s.length(); j++){
-			if(j!=0 && (s[j-1]==s[j])){
-				continue;
-			} else {
-				arr[s[j]-'a']++;
-			}
+		if(i!=0 && isdigit(s[i])){
+			arr.emplace_back(pre);
+			pre=score;
+			score=s[i]-'0';
 		}
 		
-		for(int j=0; j<26; j++){
-			if(arr[j]>1){
-				cnt++;
-				break;
-			}
+        if(isdigit(s[i]) && (s[i+1]=='0')){
+            score=10;
+            i++;
+            continue;
+        }
+        
+		if(s[i]=='S'){
+			score=pow(score, 1);
+		}
+		if(s[i]=='D'){
+			score=pow(score, 2);
+		}
+		if(s[i]=='T'){
+			score=pow(score, 3);
+		}
+		
+		if(s[i]=='*'){
+			pre*=2;
+			score*=2;
+		}
+		if(s[i]=='#'){
+			score*=-1;
+		}
+		
+		if(s[i+1]=='\0'){
+			arr.emplace_back(pre);
+			arr.emplace_back(score);
 		}
 	}
 	
-	cout << n-cnt << "\n";
-	
-	return 0;
+	sum = accumulate(arr.begin(), arr.end(), 0);
+	return sum;
 }
