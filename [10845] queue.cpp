@@ -9,8 +9,11 @@ int main(){
 	
 	int n, num;
 	string s;
-	
 	deque<int> dq;
+	
+	cin >> n;
+	
+
 	
 	for(int i=0; i<n; i++){
 		cin >> s;
@@ -18,7 +21,7 @@ int main(){
 		if(s=="push"){
 			cin >> num;
 			dq.push_back(num);	
-		} else if(s=="pop") {
+		} else if(s=="pop"){
 			if(dq.size()){
 				cout << dq.front() << "\n";
 				dq.pop_front();
@@ -43,11 +46,10 @@ int main(){
 			if(dq.size()){
 				cout << dq.back() << "\n";
 			} else {
-				cout << -1 << "\n";
+				cout << -2 << "\n";
 			}
 		}
 	}
-	
 	
 	return 0;
 }
