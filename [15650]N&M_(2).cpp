@@ -3,7 +3,7 @@ using namespace std;
 
 int n, m;
 int ar[10];
-bool isused[10];
+//bool isused[10];
 
 bool check(int s, int t){
 	if (s == 0)
@@ -20,7 +20,7 @@ bool check(int s, int t){
 	return true;
 }
 
-void bt(int k){
+void bt(int k, int num){
 	if (k == m)
 	{
 		for (int i = 0; i < m; i++)
@@ -30,15 +30,15 @@ void bt(int k){
 		cout << "\n";
 		return;
 	}
-	for (int i = 1; i <= n; i++)
+	for (int i = num; i <= n; i++)
 	{
-		if (!isused[i] && check(k, i))
-		{
+//		if (!isused[i] && check(k, i))
+//		{
 			ar[k] = i;
-			isused[i] = true;
-			bt(k + 1);
-			isused[i] = false;
-		}
+//			isused[i] = true;
+			bt(k + 1, i + 1);
+//			isused[i] = false;
+//		}
 	}
 }
 
@@ -47,7 +47,7 @@ int main(){
 	cout.tie(NULL);
 	
 	cin >> n >> m;
-	bt(0);
+	bt(0, 1);
 	
 	return 0;
 }
