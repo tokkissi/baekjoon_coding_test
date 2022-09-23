@@ -33,8 +33,8 @@ const solution = (inp) => {
     for (let i = t; i < arrlen; i++) {
       if (arrisused[i] === 0) {
         arrisused[i] = 1;
-        ans[k] = arr[i];
-        bt(k + 1, i);
+        ans.push(arr[i]);
+        bt(k + 1, i + 1);
         arrisused[i] = 0;
         ans.pop();
       }
