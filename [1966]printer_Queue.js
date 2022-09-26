@@ -25,7 +25,9 @@ const solution = (inp) => {
     }
     if (i % 2 === 0) {
       arr = inp[i].split(" ");
+      // 깊은 복사
       let q = [...arr];
+      // 같은 수가 있어도 목표를 찾기 위한 q와 쌍둥이 배열
       let chk = Array(q.length).fill(0);
       chk[m] = 1;
       let target = Number(arr[m]);
