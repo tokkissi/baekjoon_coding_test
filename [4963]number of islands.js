@@ -21,48 +21,45 @@ const solution = (inp) => {
   let ans = [];
 
   while (true) {
-    // 새로 갱신될 다음 입력 조건 줄 수가 입력 줄보다 크다면 break
     let cnt = 0;
-    console.log("start");
-    let templine = curline;
+    // 새로 갱신될 다음 입력 조건 줄 수가 입력 줄보다 크다면 break
     if (curline === inp.length) {
       break;
     }
 
+    //8방향 설정을 위한 배열
     let dy = [-1, -1, -1, 0, 1, 1, 1, 0];
     let dx = [-1, 0, 1, 1, 1, 0, -1, -1];
-    console.log(inp[curline].split(" "));
+
     // 조건 줄에서 조건 변수로 설정하기
     let [w, h] = inp[curline].split(" ").map((el) => Number(el));
 
     // 보드에 조건 입력하기
     let board = Array.from(Array(h), () => Array(w).fill(0));
-    console.log(board);
     for (let i = curline + 1; i < curline + h + 1; i++) {
       let yline = i - curline - 1;
       let xline = inp[i].split(" ").map((el) => Number(el));
-      console.log("xline: ", xline);
+
       for (let j = 0; j < xline.length; j++) {
         board[yline][j] = xline[j];
       }
     }
-    console.log("---");
-    console.log(board);
 
-    for (let i = templine + 1; i < templine + h + 1; i++) {
+    // 보드를 순회하며 섬이 있으면(1이면), 0으로 바꾸고 dfs 실행
+    for (let i = curline + 1; i < curline + h + 1; i++) {
       for (let j = 0; j < w; j++) {
-        console.log("yogiyo: ", board[i][j]);
-        if (board[i][j]) {
-          console.log("i: ", i, "// j : ", j);
+        if (board[i - curline - 1][j]) {
           cnt++;
-          dfs(i, j);
+          dfs(i - curline - 1, j);
         }
       }
     }
 
+    // dfs 구현
     function dfs(y, x) {
       board[y][x] = 0;
 
+      // 대각선도 포함이므로 8방향을 체크한다
       for (let i = 0; i < 8; i++) {
         let ny = y + dy[i];
         let nx = x + dx[i];
@@ -80,7 +77,6 @@ const solution = (inp) => {
     // 다음 줄을 현재 조건 줄로 갱신
     curline += h + 1;
     ans.push(cnt);
-    console.log("한바퀴");
   }
   console.log(ans.join("\n"));
 };
