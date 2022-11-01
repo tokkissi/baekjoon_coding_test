@@ -17,14 +17,14 @@ readline.on("close", () => {
 const solution = (inp) => {
   let piece = inp.shift();
   inp.shift();
-  let ans = [];
-  let regexstr = new RegExp(`(${inp})`);
-  // let regex = new RegExp(regexstr);
+  let cnt = 0;
+  let regexstr = new RegExp(`(${piece})`);
   for (el of inp) {
-    let chk = regexstr.test(el);
-    ans.push(chk);
-
-    console.log(chk);
+    let temp = el + el;
+    let chk = regexstr.test(temp);
+    if (chk) {
+      cnt++;
+    }
   }
-  console.log(ans);
+  console.log(cnt);
 };
